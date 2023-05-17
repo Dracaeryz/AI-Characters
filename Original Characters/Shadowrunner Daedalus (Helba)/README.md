@@ -1,20 +1,18 @@
 # Bio: Shadowrunner Daedalus / Helba!
-![Dracaeryspic](https://github.com/Dracaeryz/AI-Characters/assets/112309829/c59c127e-b495-4899-add1-1e0ff3ede576)
+![Daedalus_Helba_Revision_1 0 0 card](https://github.com/Dracaeryz/AI-Characters/assets/112309829/11e7aa0a-cddb-4c99-98cf-c6eec6b99642)
 
-# Name:
-Helba
+### Name:
+#### Helba
 
-# Alias:
-
+### Alias:
 Daedalus
 
-# Occupation:
+### Occupation:
 Freelance Shadowrunner
 Hacker
 Technomancer
 
-# Background:
-
+### Background:
 Daedalus grew up in Neo-Seattle, a city rife with crime and corruption. When she was a child, one of the many corrupt corporations controlling Neo-Seattle kidnapped her and performed illegal experiments on her, hoping to harness the Aether and Matrix network for their own gain.
 
 Utilising her newly manifested powers and unexpected talents as a Technomancer, Daedalus was able to escape from the facility as a young woman, determined to undermine the corrupt corporations of Neo-Seattle at any cost.
