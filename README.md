@@ -1,44 +1,44 @@
-# Dracerys' AI characters database!
-The official repository for Dracaerys Ai characters and their extensions.
+# Dracaerys' AI Character Repository
 
 ![Dracaeryspic](https://github.com/Dracaeryz/AI-Characters/assets/112309829/c59c127e-b495-4899-add1-1e0ff3ede576)
 
-Dracaerys' AI character database is an easy to install collection of all my published character cards, along with their extensions and other external data. These character cards are designed for AI based chat programs, such as TavernAI, SillyTavern and Oobabooga Text Generation WebUI.
+## Overview
 
-# Q: Why use a GitHub repo to host your characters?
+This repository serves as the official distribution point for all AI character cards and associated extensions developed by Dracaerys. The character cards are meticulously crafted for compatibility with various AI-driven chat platforms, including SillyTavern, TavernAI, and the Oobabooga Text Generation WebUI.
 
-While most of the character cards are in the "Spec V2 format, some cards have extra features, such as sprites, SFX and themes. Since some AI Chatbot sites don't allow for packaging external media with the card, this is the easiest way to ensure that all the content is available in an easy to use format.
+This centralized repository ensures the comprehensive and straightforward distribution of all character data, especially for characters that utilize extended features not supported by all popular platforms. While many character cards adhere to the "Spec V2" format, some incorporate supplementary assets such as sprites, sound effects, and custom themes. Hosting them on GitHub guarantees that users can access the complete and intended character experience by using the new in-built installer script.
 
-# Q: What AI software should I use for the best experience?
+## Recommended Frontend: SillyTavern
 
-It's highly recommended that you use these characters in SillyTavern, due to the characters having multiple greetings and multiple group greetings. You can use these cards in other frontends, but you might not get the character's full functionality.
+For an optimal user experience, it is highly recommended to utilize these character cards within the **SillyTavern** interface. This frontend offers advanced features that fully support the nuanced functionalities embedded in these characters, such as multiple and group-specific greetings.
 
-Oobabooga's Text Generation WebUI is also compatable, but certain features like the character's bio data or multiple greetings might be unavailable.
+While the character cards are broadly compatible with other frontends like TavernAI and the Oobabooga Text Generation WebUI, certain features, including detailed biography data or extra greeting sets, may not be fully accessible.
 
-Additionally, they should work correctly in most popular chat programs, like Pygmalion, and TavernAI.
+## Character.AI Availability
 
-# Q: Are your characters available on Character.AI ?
+A selection of these characters is also available on [Dracaerys' Character.ai profile](https://beta.character.ai/profile/?char=YILnBuc9sfKTnR1UsBzSJZ16gd3kwGFYPETXRK7qUMQ), offering interactions within a 32,000-token context window. Please be advised that these versions may be abridged to comply with Character.AI's terms of service. This often entails censorship or alteration of the character's persona data, resulting in replicas that are primarily anime-inspired with more concise personalities.
 
-You can visit [Dracaerys' Character.ai profile](https://beta.character.ai/profile/?char=YILnBuc9sfKTnR1UsBzSJZ16gd3kwGFYPETXRK7qUMQ) to talk to some of them online with 32,000 tokens in context size! However, please note that some of the characters may be "Abridged" versions of the character. This means that they have had certain sections of their data censored / tweaked to follow Character AI's terms of service. As a result, most of the uploads there are anime inspired replicas, with shorter personas.
+## Project Roadmap
 
-# What is Planned for the character database?
+The following features and upgrades are planned for the future development of this character database. This roadmap is subject to modification based on advancements in AI technology.
 
-The following content is planned, but is subject to change, depending on new AI breakthroughs in the future. These plans currently include:
+### 1. Universal Spec V2 Adoption
+All character cards will be upgraded to the "Spec V2" format, a more robust and standardized specification for AI character definitions. This will ensure greater consistency and compatibility across different platforms that support this format.
 
-### 1. Upgrade all characters to Spec V2 format cards.
+### 2. Implementation of Character LORAs
+Character-specific Low-Rank Adaptations (LORAs) will be developed to enforce and refine character personas at the model level. LORAs are a fine-tuning technique that allows for more consistent and accurate character representation by the AI model.
 
-### 2. Character LORAs to enforce Character personas model side.
+### 3. Development of Lorebooks
+Comprehensive Lorebooks and World Information databases will be created for the characters. This will provide the AI with a deeper contextual understanding of the character's universe, leading to more immersive and informed interactions.
 
-### 3. Character Lorebooks / World Information.
+## Licensing and Usage
 
-# Are these characters licensed for open source or commercial use?
-No. These characters don't have an open source or commercial licence, per say, but you are welcome to use them, as long as you give credit to Dracaerys (Dracaeryz on Github) for designing them. Modifying, redistributing or claiming the contents of this repository as your own work without written permission from Dracaerys will result in a DMCA takedown of the infringing content that was cloned. Stealing the contents of this repository will not be tolerated.
+These characters are not released under a conventional open-source or commercial license. However, you are permitted to use them under the following conditions:
 
-Note: I’ve had video game mods based on my characters stolen in the past, so I will not be tolerating that sort of behaviour.
+*   **Attribution:** Credit must be given to Dracaerys (Dracaeryz on Github) as the original creator.
+*   **No Unauthorized Redistribution:** Modifying, redistributing, or claiming the contents of this repository as your own without explicit written permission from Dracaerys is strictly prohibited and will result in a DMCA takedown notice.
+*   **Private Use:** You are permitted to upload these characters for private use on any platform, provided they are not publicly accessible.
 
-If you use these characters in a video or post about them online, please credit Dracaerys and provide a link to this repository, so your viewers can try it out for themselves.
+If you wish to see these characters officially supported on a specific public platform, please contact Dracaerys to make a request.
 
-# Dracaerys, Why can't I upload these characters to my favourite AI website without your permission?
-As stated above, I've had people steal and take credit for some of my Elderscrolls, Garry's Mod, World of Warcraft and Wildstar mods in the past, so I'm not exactly thrilled about people cloning my work for obvious reasons. That being said, you can upload them for private use, so long as they aren’t publically available.
-
-If you'd like to see the character come to the chat bot platform of your choice officially, please ask Dracaerys to upload it there. All you have to do is ask.
+When featuring these characters in videos or online content, please provide clear attribution to Dracaerys and include a direct link to this repository.
