@@ -3,12 +3,12 @@ setlocal enabledelayedexpansion
 
 :: #############################################################################
 :: #                                                                           #
-:: #      AI-Characters Content Installer for Silly Tavern                     #
-:: #      Revision 2.1 - Public                 #
+:: #      Dracaerys' AI-Characters Content Installer for Silly Tavern                     #
+:: #      Version 2.6 - Implemented Menu + Scanner bug fixes + Menu Loops + fully dynamic folder scanning              #
 :: #                                                                           #
 :: #############################################################################
 
-title Dracaerys AI-Characters Content Installer V2.1
+title Dracaerys' AI-Characters Content Installer V2.6!
 
 :: --- Configuration ---
 set "DATABASE_FILE=installer_database.txt"
@@ -24,15 +24,42 @@ exit /b
 ::  MAIN SCRIPT LOGIC
 :: ============================================================================
 :main
+    :menu_loop
     cls
     echo =================================================================
-    echo  Dracaerys AI-Characters Content Installer for Silly Tavern
+    echo  Dracaerys' AI-Characters Content Installer - Main Menu!
     echo =================================================================
     echo.
-    echo This script will copy content from the AI-Characters repository
-    echo into your Silly Tavern installation.
+    echo. What would you like to do?
     echo.
+    echo  1. Install Content (Recommended)
+    echo     (Creates or uses an existing database, scans for new content packs, then installs it into SillyTavern)
+    echo.
+    echo  2. Force Rebuild Database
+    echo     (Deletes the current database and creates a fresh one by
+    echo      scanning every folder in the repository)
+    echo.
+    echo  3. Exit
+    echo.
+    
+    set "choice="
+    set /p "choice=Please enter your choice [1, 2, or 3]: "
 
+    if "%choice%"=="1" call :runInstaller
+    if "%choice%"=="2" call :rebuildDatabase
+    if "%choice%"=="3" goto :eof
+
+    :: --- After an action is completed, or if the choice was invalid, loop back ---
+    if "%choice%"=="1" goto menu_loop
+    if "%choice%"=="2" goto menu_loop
+
+    echo.
+    echo Invalid choice. Please try again.
+    pause
+    goto menu_loop
+
+:runInstaller
+    cls
     :: --- Step 1: Get Silly Tavern Path ---
     call :getSillyTavernPath
     
@@ -74,6 +101,35 @@ exit /b
     echo =================================================================
     echo.
     echo All content packs have been successfully installed.
+    pause
+goto :eof
+
+:rebuildDatabase
+    cls
+    echo =================================================================
+    echo  Rebuilding Content Database...
+    echo =================================================================
+    echo.
+    
+    if exist "%DATABASE_FILE%" (
+        echo Deleting old database file...
+        del "%DATABASE_FILE%"
+        echo Old database deleted.
+    ) else (
+        echo No old database found. A new one will be created.
+    )
+    echo.
+    echo Now scanning repository for all content packs...
+    echo.
+    
+    call :scanForNewContent
+    
+    echo.
+    echo =================================================================
+    echo  Database rebuild complete!
+    echo =================================================================
+    echo You can now run the installer normally.
+    echo.
     pause
 goto :eof
 
@@ -136,14 +192,18 @@ goto :eof
     set "NEW_CONTENT_FOUND=0"
     for /d /r . %%d in (*) do (
         set "folderName=%%~nd"
+        
+        rem --- **FIX**: Dynamic scanning for all content types by checking prefixes ---
+        rem --- Ordered from longest prefix to shortest to avoid conflicts ---
+        if /i "!folderName:~0,11!"=="group chats" call :updateDatabase "%%d" "group chats"
+        if /i "!folderName:~0,11!"=="backgrounds" call :updateDatabase "%%d" "backgrounds"
         if /i "!folderName:~0,10!"=="characters"  call :updateDatabase "%%d" "characters"
-if /i "!folderName:~0,10!"=="assets"  call :updateDatabase "%%d" "assets"
-if /i "!folderName:~0,10!"=="chats"  call :updateDatabase "%%d" "chats"
-if /i "!folderName:~0,10!"=="group chats"  call :updateDatabase "%%d" "group chats"
-if /i "!folderName:~0,10!"=="themes"  call :updateDatabase "%%d" "themes"
-if /i "!folderName:~0,10!"=="worlds"  call :updateDatabase "%%d" "worlds"
-        if /i "!folderName:~0,10!"=="backgrounds" call :updateDatabase "%%d" "backgrounds"
-        if /i "!folderName!"=="sysprompt"         call :updateDatabase "%%d" "sysprompt"
+        if /i "!folderName:~0,9!"=="sysprompt"   call :updateDatabase "%%d" "sysprompt"
+        if /i "!folderName:~0,7!"=="ambient"     call :updateDatabase "%%d" "assets\ambient"
+        if /i "!folderName:~0,6!"=="themes"      call :updateDatabase "%%d" "themes"
+        if /i "!folderName:~0,6!"=="worlds"      call :updateDatabase "%%d" "worlds"
+        if /i "!folderName:~0,5!"=="chats"       call :updateDatabase "%%d" "chats"
+        if /i "!folderName:~0,3!"=="bgm"         call :updateDatabase "%%d" "assets\bgm"
     )
 
     if "%NEW_CONTENT_FOUND%"=="0" (
@@ -154,26 +214,19 @@ goto :eof
 :updateDatabase
     set "fullPath=%~1"
     set "contentType=%~2"
-
-    rem --- FIX: Robustly remove any potential leading/trailing spaces from contentType ---
     for /f "tokens=*" %%a in ("!contentType!") do set "contentType=%%a"
 
-    rem --- Check and skip the REPO_ROOT itself ---
     set "tempRepoRoot=!REPO_ROOT!"
-    rem --- FIX: Corrected typo in variable name from tempRoo to tempRepoRoot ---
     if "!tempRepoRoot:~-1!"=="\" set "tempRepoRoot=!tempRepoRoot:~0,-1!"
     if /i "!fullPath!"=="!tempRepoRoot!" ( goto :eof )
     
-    rem --- Calculate relativePath using correct string substitution ---
     set "relativePath=!fullPath:%REPO_ROOT%=!"
-
-    rem --- Final check to ensure calculation worked ---
     if not defined relativePath ( goto :eof )
 
-    findstr /L /C:"!relativePath!;!contentType!" "%DATABASE_FILE%" >nul
+    findstr /L /C:"!relativePath!;!contentType!" "%DATABASE_FILE%" >nul 2>nul
     if %errorlevel% neq 0 (
         echo New Content Found: !relativePath!
-        echo !relativePath!;!contentType!>> "%DATABASE_FILE%"
+        echo !relativePath!;!contentType! >> "%DATABASE_FILE%"
         echo  -^> Added to database.
         set "NEW_CONTENT_FOUND=1"
     )
